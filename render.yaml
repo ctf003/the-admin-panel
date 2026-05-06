@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: admin-panel-ctf
+    env: docker
+    plan: free
+    dockerfilePath: ./Dockerfile.render
+    envVars:
+      - key: FLAG
+        sync: false
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: admin-panel-redis
+          property: connectionString
+    healthCheckPath: /
+
+  - type: redis
+    name: admin-panel-redis
+    plan: free
+    maxmemoryPolicy: noeviction

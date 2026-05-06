@@ -1,0 +1,27 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application files
+COPY app/ ./app/
+
+# Create non-root user
+RUN useradd -m -u 1001 ctfuser && \
+    chown -R ctfuser:ctfuser /app && \
+    mkdir -p /tmp && \
+    chown -R ctfuser:ctfuser /tmp
+
+USER ctfuser
+
+# Environment variables
+ENV FLAG=""
+ENV PORT=10000
+
+EXPOSE 10000
+
+# Start the application
+CMD gunicorn -w 2 -b 0.0.0.0:$PORT "app:create_app()"
