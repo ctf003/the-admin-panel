@@ -1,0 +1,10 @@
+.git/
+.env
+*.pyc
+__pycache__/
+*.map
+requirements-dev.txt
+tests/
+.gitignore
+README.md
+*.db

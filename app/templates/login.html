@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internal Portal - Login</title>
+    <link rel="stylesheet" href="/static/style.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <h1>Internal Portal</h1>
+            <h2>Login</h2>
+            {% if error %}
+            <div class="error">{{ error }}</div>
+            {% endif %}
+            <!-- TODO: sanitise user inputs before v2 release -->
+            <form method="POST" action="/login" id="loginForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" name="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+            <p class="link">Don't have an account? <a href="/register">Register here</a></p>
+        </div>
+    </div>
+    <script src="/static/app.min.js"></script>
+</body>
+</html>
