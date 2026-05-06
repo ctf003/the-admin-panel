@@ -18,3 +18,4 @@ services:
     name: admin-panel-redis
     plan: free
     maxmemoryPolicy: noeviction
+    ipAllowList: []
