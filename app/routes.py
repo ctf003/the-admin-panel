@@ -193,12 +193,14 @@ def robots():
     return '''User-agent: *
 Disallow: /secret-backup.zip'''
 
+@bp.route('/secret-backup.zip')
+def backup():
+    import os
+    file_path = os.path.join(os.path.dirname(__file__), 'static', 'secret-backup.zip')
+    return send_file(file_path, mimetype='application/zip', as_attachment=True, download_name='secret-backup.zip')
+
 @bp.route('/logout')
 def logout():
     response = make_response(render_template('login.html', message='Logged out successfully'))
     response.set_cookie('token', '', expires=0)
     return response
-
-@bp.route('/static/secret-backup.zip')
-def backup():
-    return send_file('static/secret-backup.zip', mimetype='application/zip')
